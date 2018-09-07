@@ -1,23 +1,23 @@
-const api = (function(){
+'use strict';
+
+const api = (function () {
   const BASE_URL = 'https://thinkful-list-api.herokuapp.com/richie';
 
-  const getItems = function(callback) {
-    $.getJSON(BASE_URL + '/items', callback);
+  const getItems = function () {
+    return $.getJSON(BASE_URL + '/items');
   };
 
-  const createItem = function(name, onSuccess, onError) {
+  const createItem = function (name) {
     const newItem = JSON.stringify({ name });
-    $.ajax({
+    return $.ajax({
       url: BASE_URL + '/items',
       method: 'POST',
       contentType: 'application/json',
       data: newItem,
-      success: onSuccess,
-      error: onError,
     });
   };
 
-  const updateItem = function(id, updateData, callback) {
+  const updateItem = function (id, updateData, callback) {
     $.ajax({
       url: BASE_URL + '/items/' + id,
       method: 'PATCH',
@@ -27,7 +27,7 @@ const api = (function(){
     });
   };
 
-  const deleteItem = function(id, callback) {
+  const deleteItem = function (id, callback) {
     $.ajax({
       url: BASE_URL + '/items/' + id,
       method: 'DELETE',
